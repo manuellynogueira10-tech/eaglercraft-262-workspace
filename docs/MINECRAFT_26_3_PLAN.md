@@ -35,3 +35,23 @@ Minecraft client. Do not label its canvas demo as gameplay.
 | Hosted playable 26.3 URL | Not available |
 
 This project is separate from the previous local Gradle project and Gaius.
+
+## Build verification (2026-10-08)
+
+The GitHub Actions source inventory unit tests completed successfully:
+https://github.com/manuellynogueira10-tech/eaglercraft-262-workspace/actions/runs/37776770841
+
+This verifies the **input validator only**, not the game, TeaVM client build,
+Minecraft assets, WebGL rendering, or a deployed game. The public repository
+contains none of the proprietary client source required for Java Edition 26.3.
+
+### Honest release gate
+
+A browser link may be called "Minecraft Java 26.3 playable" only after:
+1. Genuine licensed 26.3 inputs are integrated in a private build;
+2. The native graphics/audio/storage/networking APIs have functioning Web substitutes;
+3. The actual Java 26.3 menu creates a world and renders its blocks and entities;
+4. Saves survive browser restart and controls work in the target browsers;
+5. A verified legal distribution route exists for the build and its game assets.
+
+A hosted TeaVM canvas demo is **not** sufficient for any of these tests.
