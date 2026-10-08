@@ -67,3 +67,21 @@ tasks.withType<Jar> {
 tasks.named("jar").configure {
 	dependsOn += "classes"
 }
+ 
+// Local-only source preflight for the planned Java Edition 26.3 Web port.
+// This task deliberately does NOT run in the inherited 26.2 demo build.
+tasks.register("verifyMinecraft263Input") {
+    group = "verification"
+    description = "Check that private Minecraft 26.3 Java sources exist; does not claim browser playability."
+    doLast {
+        val privateRoot = layout.projectDirectory.dir("port-src/minecraft-26.3").asFile
+        val sourceDir = privateRoot.resolve("src/main/java")
+        check(sourceDir.isDirectory) {
+            "Missing licensed source input: ${sourceDir.path}. See docs/MINECRAFT_26_3_PLAN.md"
+        }
+        val count = fileTree(sourceDir) { include("**/*.java") }.files.size
+        check(count > 0) { "No .java files under ${sourceDir.path}" }
+        logger.lifecycle("Found {} Java files in private Minecraft 26.3 input.", count)
+        logger.lifecycle("Source found does not mean a Minecraft 26.3 Web port has been compiled.")
+    }
+}

@@ -46,3 +46,6 @@ bin
 deploy-docs/
 node_modules/
 package*.json
+
+# Private licensed Minecraft 26.3 input (never commit)
+port-src/minecraft-26.3/
